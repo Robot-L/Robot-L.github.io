@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/robot-logo-min.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/robot-logo-min.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/robot-logo-min.png">
+  <link rel="mask-icon" href="/images/robot-logo-min.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robot-l.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: true,
+    pangu: false,
+    comments: {"style":"buttons","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Hello world! :P">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mr R&#39;s Blog">
+<meta property="og:url" content="https://robot-l.github.io/index.html">
+<meta property="og:site_name" content="Mr R&#39;s Blog">
+<meta property="og:description" content="Hello world! :P">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Robot.L">
+<meta property="article:tag" content="ROBOT block">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robot-l.github.io/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false
+  };
+</script>
+
+  <title>Mr R's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr R's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">热爱可抵岁月漫长</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">7</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/Robot-L" class="github-corner" title="点击进入我的GitHub" aria-label="点击进入我的GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://robot-l.github.io/2020/06/05/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ooo.0o0.ooo/2016/11/30/583efcf224314.jpg">
+      <meta itemprop="name" content="Robot.L">
+      <meta itemprop="description" content="Hello world! :P">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr R's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/05/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-05 21:24:27" itemprop="dateCreated datePublished" datetime="2020-06-05T21:24:27+08:00">2020-06-05</time>
+            </span>
+
+          
+            <span id="/2020/06/05/hello-world/" class="post-meta-item leancloud_visitors" data-flag-title="Hello World" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://robot-l.github.io/2020/06/01/%E4%BA%9A%E4%BF%A1/NAT%E5%86%85%E5%A4%96%E7%BD%91%E5%8F%8C%E8%BF%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ooo.0o0.ooo/2016/11/30/583efcf224314.jpg">
+      <meta itemprop="name" content="Robot.L">
+      <meta itemprop="description" content="Hello world! :P">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr R's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/01/%E4%BA%9A%E4%BF%A1/NAT%E5%86%85%E5%A4%96%E7%BD%91%E5%8F%8C%E8%BF%9E/" class="post-title-link" itemprop="url">亚信/NAT内外网双连</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-01 11:09:55" itemprop="dateCreated datePublished" datetime="2020-06-01T11:09:55+08:00">2020-06-01</time>
+            </span>
+
+          
+            <span id="/2020/06/01/%E4%BA%9A%E4%BF%A1/NAT%E5%86%85%E5%A4%96%E7%BD%91%E5%8F%8C%E8%BF%9E/" class="post-meta-item leancloud_visitors" data-flag-title="亚信/NAT内外网双连" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="NAT内外网双连"><a href="#NAT内外网双连" class="headerlink" title="NAT内外网双连"></a>NAT内外网双连</h1><ul>
+<li><p>环境 ：parallels desktop  + win7（需要软件可以找我）</p>
+</li>
+<li><p>内网网关：192.168.76.1</p>
+</li>
+<li><p>外网网关：192.168.0.1</p>
+<h2 id="1-MAC网络设置"><a href="#1-MAC网络设置" class="headerlink" title="1. MAC网络设置"></a>1. MAC网络设置</h2><p>分别配置好外网、内网两个网络（左下角<code>+</code>可以增加配置），其中路由器就是网关地址，注意外网配置顺序在前（如果顺序错了，在下方的“设定服务顺序”可以更改）</p>
+<img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfah7fyiwbj30u00ufwu5.jpg" alt="image-20200530144737711" style="zoom: 50%;" />
+
+
+
+</li>
+</ul>
+<p><strong>至此Mac可以正常访问外网。</strong></p>
+<h2 id="2-虚拟机网络设置"><a href="#2-虚拟机网络设置" class="headerlink" title="2. 虚拟机网络设置"></a>2. 虚拟机网络设置</h2><p>虚拟机右上角点击网络图标，改成<code>共享网络</code>（默认就是）</p>
+<img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfahpi7hgcj30vi0ks7kn.jpg" alt="image-20200530150459907" style="zoom: 50%;" />
+
+<p>查看虚拟机网络设置，确保是自动获取ip:</p>
+<img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfakknqrt1j30pg0skdie.jpg" alt="image-20200530164408102" style="zoom:50%;" />
+
+
+
+<p><strong>至此，虚拟机可以正常访问浏览器网页。</strong></p>
+<h2 id="3-安装4A软件及设置环境"><a href="#3-安装4A软件及设置环境" class="headerlink" title="3. 安装4A软件及设置环境"></a>3. 安装4A软件及设置环境</h2><p>安装好4A后，插上key，登陆之前需要设置mac路由，此时虚拟机是通过mac联网，所以在Mac终端中需要配置4A的网关为内网网关：(可能提示需要输入Mac登陆密码，输入完后按回车即可)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo route add -net 10.154.0.0 192.168.76.1</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>然后在虚拟机4A中输入密码进行登陆，登陆成功。</strong></p>
+<p><strong>验证：虚拟机中浏览器访问内网阿波罗配置中心，应该能正常访问：</strong></p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">http://192.192.2.101:1070</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-虚拟机IP映射"><a href="#4-虚拟机IP映射" class="headerlink" title="4. 虚拟机IP映射"></a>4. 虚拟机IP映射</h2><p>  有两种方式，<strong>只能选其中一种方式进行设置</strong>：</p>
+<ol>
+<li><p>懒癌版： </p>
+<p>使用端口映射工具PortMap，配置已经配好打包在压缩包中，下载后解压到虚拟机桌面运行即可：</p>
+<p><img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfhfweke4zj30zc0l4ju7.jpg" alt="2.jpg"></p>
+</li>
+</ol>
+<p>   软件在群文件里（PortMap端口映射.rar）</p>
+<ol start="2">
+<li><p>命令行版（注意如果使用方式1就不能再使用该方式）</p>
+<p>在虚拟机的cmd（需以管理员权限运行）中执行：</p>
+</li>
+</ol>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1070</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1070</span></span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1080</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1080</span></span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1521</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1080</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>验证：虚拟机浏览器使用本地1070端口访问，能访问内网的阿波罗配置中心：</strong></p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">http://127.0.0.1:1070</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-端口转发（内网穿透）"><a href="#5-端口转发（内网穿透）" class="headerlink" title="5. 端口转发（内网穿透）"></a>5. 端口转发（内网穿透）</h3><p>在虚拟机中按 <code>command</code>+<code>,</code> 调出虚拟机偏好设置对话框，在<code>网络</code>中<code>端口转发规则</code>下点击<code>+</code>添加规则配置(注：如果发现对话框中无法编辑，先点击左下角的🔐图标解锁)</p>
+<img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfhaffhoukj30v30u0tfs.jpg" alt="image-20200605115254677" style="zoom: 50%;" />
+
+<p>按照上图配置好三条规则（分别是数据库、阿波罗客户端、阿波罗meta服务器）</p>
+<img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfamsg6jltj30wc0u047p.jpg" alt="image-20200530180049147" style="zoom: 50%;" />
+
+
+
+<p>验证：Mac用浏览器访问 <code>127.0.0.1:1070</code> 可以打开阿波罗配置中心</p>
+<h2 id="6-mac-ip映射"><a href="#6-mac-ip映射" class="headerlink" title="6. mac ip映射"></a>6. mac ip映射</h2><p>在终端中执行下列命令，将192.192.2.101,192.192.2.102两个内网地址的请求转发到127.0.0.1中去：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">EXT_INTERFACE=`ifconfig | grep -B 6 <span class="string">'192.168.0.'</span> | grep <span class="string">'\d: '</span>| tail -n 1 |awk -F\: <span class="string">'&#123;print $1&#125;'</span>`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"rdr on lo0 inet proto tcp from any to &#123;192.192.2.101,192.192.2.102&#125;  -&gt; 127.0.0.1 </span></span><br><span class="line"><span class="string">pass out on <span class="variable">$&#123;EXT_INTERFACE&#125;</span> route-to lo0 inet proto tcp from any to 192.192.2.101"</span>| sudo pfctl -ef -</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"执行成功！外网网卡：<span class="variable">$EXT_INTERFACE</span>"</span></span><br></pre></td></tr></table></figure>
+
+<p>如提示需要输入密码，输入Mac开机密码即可。</p>
+<h2 id="7-开始上网"><a href="#7-开始上网" class="headerlink" title="7. 开始上网"></a>7. 开始上网</h2><p>用Mac浏览器访问一下192.192.2.101:1070（阿波罗配置中心），测试是否成功：）</p>
+<blockquote>
+<p>说明：</p>
+<p>本文只配置了最常用的三个内网地址，后续如果遇到其他需要访问的内网端口，只需要在步骤4、5中新增相应的端口映射配置（如项目中csf请求需要访问资源服务，192.192.2.101:20201，在步骤4、5中新增20201端口的映射规则即可）</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://robot-l.github.io/2019/12/18/%E4%BA%9A%E4%BF%A1/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ooo.0o0.ooo/2016/11/30/583efcf224314.jpg">
+      <meta itemprop="name" content="Robot.L">
+      <meta itemprop="description" content="Hello world! :P">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr R's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/18/%E4%BA%9A%E4%BF%A1/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">如何优雅的进行批量业务校验</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-18 23:12:08" itemprop="dateCreated datePublished" datetime="2019-12-18T23:12:08+08:00">2019-12-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%9A%E4%BF%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">亚信</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%9A%E4%BF%A1/AppFrame/" itemprop="url" rel="index">
+                    <span itemprop="name">AppFrame</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/18/%E4%BA%9A%E4%BF%A1/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/" class="post-meta-item leancloud_visitors" data-flag-title="如何优雅的进行批量业务校验" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>数据校验分为为两种，一是<strong>基本数据校验</strong>，如参数非空校验，枚举值合法校验；二是<strong>业务校验</strong>，需要根据业务场景设计校验规则，我们这里只讨论<strong>批量</strong>的业务数据校验，例如用户在页面上选择一批号码数据进行删除，规则为：</p>
+<blockquote>
+<p>1.号码必须在数据库中存在</p>
+<p>2.号码的状态必须为“未下发状态”</p>
+</blockquote>
+<p>基本数据校验不通过，属于调用接口传参的问题，应该直接抛出异常。而对于批量业务校验，应该有详细的错误信息，批量的业务校验要将校验失败的数据和对应的错误原因返回给前端进行处理。</p>
+<p>通常我们在代码里的校验会用if语句和for循环来处理这些校验，但是代码很繁琐，下面介绍一些更优雅的处理方式。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/18/%E4%BA%9A%E4%BF%A1/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://robot-l.github.io/2019/12/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ooo.0o0.ooo/2016/11/30/583efcf224314.jpg">
+      <meta itemprop="name" content="Robot.L">
+      <meta itemprop="description" content="Hello world! :P">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr R's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">如何快速搭建Hexo博客</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-07 01:10:40" itemprop="dateCreated datePublished" datetime="2019-12-07T01:10:40+08:00">2019-12-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%83%A1%E6%90%9E%E7%9E%8E%E6%90%9E/" itemprop="url" rel="index">
+                    <span itemprop="name">胡搞瞎搞</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%83%A1%E6%90%9E%E7%9E%8E%E6%90%9E/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
+                    <span itemprop="name">博客</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" class="post-meta-item leancloud_visitors" data-flag-title="如何快速搭建Hexo博客" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>说来惭愧，16年我第一次使用Hexo搭建的github博客（就是眼前这个博客），写了第一篇博文【序】，say了一声hello world，就直接打入冷宫，3年过去还是那一篇博文…最近想把平时写的文章重新整理放到博客上，突然发现Hexo早就不会用了，赶紧重新找资料温习了一番，也趁此次机会记录一下搭建的全过程，或许能帮助需要的朋友。废话不多说，来看看如何建立一个功能强大，颜值还高的静态博客。 </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://robot-l.github.io/2019/05/12/%E4%BA%9A%E4%BF%A1/BaseDao/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ooo.0o0.ooo/2016/11/30/583efcf224314.jpg">
+      <meta itemprop="name" content="Robot.L">
+      <meta itemprop="description" content="Hello world! :P">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr R's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/12/%E4%BA%9A%E4%BF%A1/BaseDao/" class="post-title-link" itemprop="url">不用写Dao层的类——BaseDao</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-12 09:10:40" itemprop="dateCreated datePublished" datetime="2019-05-12T09:10:40+08:00">2019-05-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%9A%E4%BF%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">亚信</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%9A%E4%BF%A1/AppFrame/" itemprop="url" rel="index">
+                    <span itemprop="name">AppFrame</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/05/12/%E4%BA%9A%E4%BF%A1/BaseDao/" class="post-meta-item leancloud_visitors" data-flag-title="不用写Dao层的类——BaseDao" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>BaseDao是基于appframe的dao层基类，对appframe底层进行了封装，面向对象设计，将原appframe提供的api进行的精简，设计了一套统一的API，并支持更丰富的sql功能。核心功能是省去了dao层的基础代码</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在之前，dao层的代码基本都是拼sql的天下，入参一个map或者10来个属性，方法体中充斥着大量的判空代码，每当有新的需求，可能就要新增方法，而每个方法都要取参数、判空拼sql，另外还要考虑日期边界啊，数据类型转换啊，等一系列繁琐的问题，此时内心OS：</p>
+<ol>
+<li><strong>能不能通用一个查询方法，不要每次来了个新需求就要加一个查询方法？</strong></li>
+<li><strong>能不能不要方法定义中10来个入参，或者在入参map中取10来个参数？</strong></li>
+<li><strong>能不能不要每个属性都要判空拼sql，见到if语句就头晕</strong></li>
+</ol>
+<p>于是BaseDao诞生了。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/05/12/%E4%BA%9A%E4%BF%A1/BaseDao/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://robot-l.github.io/2019/05/12/%E4%BA%9A%E4%BF%A1/TXT%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ooo.0o0.ooo/2016/11/30/583efcf224314.jpg">
+      <meta itemprop="name" content="Robot.L">
+      <meta itemprop="description" content="Hello world! :P">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr R's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/12/%E4%BA%9A%E4%BF%A1/TXT%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">TXT文件上传解析</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-12 09:10:40" itemprop="dateCreated datePublished" datetime="2019-05-12T09:10:40+08:00">2019-05-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%9A%E4%BF%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">亚信</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/05/12/%E4%BA%9A%E4%BF%A1/TXT%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/" class="post-meta-item leancloud_visitors" data-flag-title="TXT文件上传解析" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>资源业务有很多txt文件上传的场景，txt中一般有多列数据，然后根据这些数据去操作数据库。举个栗子，号码状态修改页面，上传文件像这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12345678</span>;<span class="number">3</span>;<span class="number">4</span></span><br><span class="line"><span class="number">12345679</span>;<span class="number">3</span>;<span class="number">5</span></span><br><span class="line">...省略若干行</span><br></pre></td></tr></table></figure>
+
+<p>每行3个数据，用”;”分隔，分别代表”号码”，”原始状态”，”目标状态”，需求是将每行的号码由”原始状态”改为”目标状态”。</p>
+<p>这种类似的需求，上传文件中每行的数据都有可能不同，有的一个数据，有的三个数据，如何设计一套通用的解析方案来处理各种文件解析需求？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/05/12/%E4%BA%9A%E4%BF%A1/TXT%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://robot-l.github.io/2011/10/02/%E9%9A%8F%E7%AC%94/%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ooo.0o0.ooo/2016/11/30/583efcf224314.jpg">
+      <meta itemprop="name" content="Robot.L">
+      <meta itemprop="description" content="Hello world! :P">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr R's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2011/10/02/%E9%9A%8F%E7%AC%94/%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90/" class="post-title-link" itemprop="url">生日快乐</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2011-10-02 07:44:00" itemprop="dateCreated datePublished" datetime="2011-10-02T07:44:00+08:00">2011-10-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9A%8F%E7%AC%94/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
+                    <span itemprop="name">博客</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2011/10/02/%E9%9A%8F%E7%AC%94/%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90/" class="post-meta-item leancloud_visitors" data-flag-title="生日快乐" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>楔子.</strong></p>
+<p>​    </p>
+<p>杜拉斯说</p>
+<p>当你开始回忆的时候 就意味着苍老</p>
+<p>​    </p>
+<p><strong>〇.</strong></p>
+<p>​    </p>
+<p>是该写些什么了</p>
+<p>毕业很久很久</p>
+<p>好像浮躁而忙碌的生活一刻也不曾安宁过</p>
+<p>在这个深沉而静谧的夜晚</p>
+<p>我整理好心情 等待思绪搁浅</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2011/10/02/%E9%9A%8F%E7%AC%94/%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Robot.L"
+      src="https://ooo.0o0.ooo/2016/11/30/583efcf224314.jpg">
+  <p class="site-author-name" itemprop="name">Robot.L</p>
+  <div class="site-description" itemprop="description">Hello world! :P</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Robot-L" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Robot-L" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:luo-zhan@qq.com" title="E-Mail → mailto:luo-zhan@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Robot.L</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(() => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#comments',
+      verify: false,
+      notify: false,
+      appId: 'lyYHF1LhwH0DsHsISqAWfXws-gzGzoHsz',
+      appKey: 'UQzH8NnDurzsBeow1j94a5CL',
+      placeholder: "留个言吧~",
+      avatar: 'monsterid',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: true,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

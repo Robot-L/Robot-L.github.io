@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/robot-logo-min.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/robot-logo-min.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/robot-logo-min.png">
+  <link rel="mask-icon" href="/images/robot-logo-min.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robot-l.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: true,
+    pangu: false,
+    comments: {"style":"buttons","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="数据校验分为为两种，一是基本数据校验，如参数非空校验，枚举值合法校验；二是业务校验，需要根据业务场景设计校验规则，我们这里只讨论批量的业务数据校验，例如用户在页面上选择一批号码数据进行删除，规则为：  1.号码必须在数据库中存在 2.号码的状态必须为“未下发状态”  基本数据校验不通过，属于调用接口传参的问题，应该直接抛出异常。而对于批量业务校验，应该有详细的错误信息，批量的业务校验要将校验失败的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何优雅的进行批量业务校验">
+<meta property="og:url" content="https://robot-l.github.io/2019/12/18/%E4%BA%9A%E4%BF%A1/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="Mr R&#39;s Blog">
+<meta property="og:description" content="数据校验分为为两种，一是基本数据校验，如参数非空校验，枚举值合法校验；二是业务校验，需要根据业务场景设计校验规则，我们这里只讨论批量的业务数据校验，例如用户在页面上选择一批号码数据进行删除，规则为：  1.号码必须在数据库中存在 2.号码的状态必须为“未下发状态”  基本数据校验不通过，属于调用接口传参的问题，应该直接抛出异常。而对于批量业务校验，应该有详细的错误信息，批量的业务校验要将校验失败的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-18T15:12:08.000Z">
+<meta property="article:modified_time" content="2019-12-18T15:12:08.000Z">
+<meta property="article:author" content="Robot.L">
+<meta property="article:tag" content="easy-appframe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robot-l.github.io/2019/12/18/%E4%BA%9A%E4%BF%A1/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>如何优雅的进行批量业务校验 | Mr R's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr R's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">热爱可抵岁月漫长</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">7</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/Robot-L" class="github-corner" title="点击进入我的GitHub" aria-label="点击进入我的GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://robot-l.github.io/2019/12/18/%E4%BA%9A%E4%BF%A1/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ooo.0o0.ooo/2016/11/30/583efcf224314.jpg">
+      <meta itemprop="name" content="Robot.L">
+      <meta itemprop="description" content="Hello world! :P">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr R's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何优雅的进行批量业务校验
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-18 23:12:08" itemprop="dateCreated datePublished" datetime="2019-12-18T23:12:08+08:00">2019-12-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%9A%E4%BF%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">亚信</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%9A%E4%BF%A1/AppFrame/" itemprop="url" rel="index">
+                    <span itemprop="name">AppFrame</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/18/%E4%BA%9A%E4%BF%A1/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/" class="post-meta-item leancloud_visitors" data-flag-title="如何优雅的进行批量业务校验" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/12/18/%E4%BA%9A%E4%BF%A1/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/18/%E4%BA%9A%E4%BF%A1/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>数据校验分为为两种，一是<strong>基本数据校验</strong>，如参数非空校验，枚举值合法校验；二是<strong>业务校验</strong>，需要根据业务场景设计校验规则，我们这里只讨论<strong>批量</strong>的业务数据校验，例如用户在页面上选择一批号码数据进行删除，规则为：</p>
+<blockquote>
+<p>1.号码必须在数据库中存在</p>
+<p>2.号码的状态必须为“未下发状态”</p>
+</blockquote>
+<p>基本数据校验不通过，属于调用接口传参的问题，应该直接抛出异常。而对于批量业务校验，应该有详细的错误信息，批量的业务校验要将校验失败的数据和对应的错误原因返回给前端进行处理。</p>
+<p>通常我们在代码里的校验会用if语句和for循环来处理这些校验，但是代码很繁琐，下面介绍一些更优雅的处理方式。</p>
+<a id="more"></a>
+
+<h2 id="一、基本数据校验"><a href="#一、基本数据校验" class="headerlink" title="一、基本数据校验"></a>一、基本数据校验</h2><p>对于非空的入参，每次去判空代码显得有点累赘，像这段从接口入参中获取数据的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">String msisdn = PartTool.getString(input, <span class="string">"MSISDN"</span>, <span class="keyword">null</span>);</span><br><span class="line"><span class="keyword">int</span> resSpec = (<span class="keyword">int</span>)PartTool.getLong(input, <span class="string">"RES_SPEC_ID"</span>, <span class="number">0</span>);</span><br><span class="line">String isVipString = PartTool.getString(input, <span class="string">"isVip"</span>, <span class="keyword">null</span>);</span><br><span class="line"><span class="keyword">boolean</span> isVip = <span class="keyword">false</span>;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">if</span>(msisdn == <span class="keyword">null</span>)&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"入参MSISDN不能为空"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(resSpec == <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"入参RES_SPEC_ID不能为空"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(isVipString == <span class="keyword">null</span>)&#123;</span><br><span class="line">   <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"入参isVip不能为空"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  <span class="comment">// 这里的isVip为了先判空，不为空再取值，代码显得很累赘</span></span><br><span class="line">  isVip = <span class="string">"true"</span>.equalsIgnoreCase(isVipString);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>在CsvUtil里面设计了几个简单的方法，可以取数据的同时进行判空操作。看改造之后的代码，是不是干净很多：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String msisdn = CsvUtil.getNotNullString(input, <span class="string">"MSISDN"</span>);</span><br><span class="line"><span class="keyword">int</span> resSpec = CsvUtil.getNotNullNumber(input, <span class="string">"RES_SPEC_ID"</span>);</span><br><span class="line"><span class="keyword">boolean</span> vip = CsvUtil.getNotNullBool(input, <span class="string">"VIP"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>CsvUtil中的方法：</p>
+<ol>
+<li>获取非空字符串</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 从Map中获取非空的字符串</span></span><br><span class="line"><span class="comment">   * 如果为空会抛出"入参不能为空"异常</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getNotNullString</span><span class="params">(Map input, String key)</span></span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>获取非空的数字</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 从Map中获取非空的数字（接受数字类型值或数字型字符串）</span></span><br><span class="line"><span class="comment">  * 如果为空会抛出"入参不能为空"异常</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getNotNullNumber</span><span class="params">(Map input, String key)</span></span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>获取非空的bool值</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 从Map中获取非空的bool值（接受bool类型或字符串"true"，"false"（忽略大小写））</span></span><br><span class="line"><span class="comment">   * 如果为空会抛出"入参不能为空"异常</span></span><br><span class="line"><span class="comment">   * 如果不为可接受的格式，抛出"入参不合法"异常</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">getNotNullBool</span><span class="params">(Map input, String key)</span></span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>获取任意泛型的List</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 在Map中获取List</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> map 参数Map</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> key key</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> List</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">getNotNullList</span><span class="params">(Map map, String key)</span></span></span><br></pre></td></tr></table></figure>
+
+
+<p>而对于某些入参只限定接收几种特定的数值，其他数值应抛异常”入参不合法”，这种情况推荐用switch语句，在default分支中抛异常，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//CURRENT_BUSINESS限定只能传0，1，2</span></span><br><span class="line"><span class="keyword">int</span> distributeType =CsvUtil.getNotNullNumber(input, <span class="string">"CURRENT_BUSINESS"</span>);</span><br><span class="line"><span class="keyword">switch</span> (distributeType) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>:<span class="comment">//执行业务分支0</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:<span class="comment">//执行业务分支1</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:<span class="comment">//执行业务分支2</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">    <span class="comment">// 入参不合法</span></span><br><span class="line">    BusiExceptionUtils.throwFormatException(Resource.RESOURCE_COMMON_140001, <span class="string">"CURRENT_BUSINESS"</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、批量业务校验"><a href="#二、批量业务校验" class="headerlink" title="二、批量业务校验"></a>二、批量业务校验</h2><p>对于批量数据的业务校验，其实整理一下校验的业务场景，可以归纳为4类：</p>
+<ol>
+<li><p>存在性校验(exist)，比如<strong>资源删除</strong>业务，要校验数据库中资源是否<strong>存在</strong>，不存在的话不能执行删除业务</p>
+</li>
+<li><p>不存在校验(not-exist)，比如<strong>资源生成</strong>业务，要校验数据库中资源是否<strong>不存在</strong>，如果存在的话不能执行生成业务</p>
+</li>
+<li><p>相等校验(equal)，某个属性必须与某值（或某些值）相等，如<strong>号码下发</strong>时<strong>号码状态</strong>必须是<strong>1-空闲</strong></p>
+</li>
+<li><p>不相等校验(not-equal)，某个属性必须不等于某值（或某些值），如一卡多号号码延期业务，号码必须是下发之后的，所以<strong>号码状态</strong>必须不为<strong>1-空闲</strong></p>
+</li>
+</ol>
+<p><strong>一般简单的业务场景基本都是这4种校验的组合。</strong></p>
+<h3 id="主角登场—CheckResult"><a href="#主角登场—CheckResult" class="headerlink" title="主角登场—CheckResult"></a>主角登场—CheckResult</h3><p>CheckResult类是专门用来处理批量业务校验的类。</p>
+<p>先来看下使用示例：(号码删除业务)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里sourceNumbers是由前台输入的号码段转换成的号码对象的数组（如：[1000,1001,1002...1999]）</span></span><br><span class="line">BOResCommonPhoneNumBean[] sourceNumbers = ...</span><br><span class="line"><span class="comment">// 到数据库中获取sourceNumbers中已存在的号码数据</span></span><br><span class="line">IRes1cmPhoneNumDAO dao = ServiceUtil.get(IRes1cmPhoneNumDAO.dao);</span><br><span class="line">BOResCommonPhoneNumBean[] existNumbers= dao.getByField(<span class="string">"MSISDN"</span>, numbers)</span><br><span class="line"><span class="comment">// 初始化CheckResult实例</span></span><br><span class="line">CheckResult&lt;BOResCommonPhoneNumBean&gt; check = CheckResult.init(sourceNumbers, existNumbers, <span class="string">"MSISDN"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开始校验：</span></span><br><span class="line"><span class="comment">// 校验规则1：号码必须存在</span></span><br><span class="line">check.checkExist(<span class="string">"该号码不存在！"</span>);</span><br><span class="line"><span class="comment">// 校验规则2：号码的状态必须为“未分配”</span></span><br><span class="line">check.checkEqual(<span class="string">"该号码已经被下发！"</span>, BOResCommonPhoneNumBean.S_DnPlatform, ResComConst.NumPlatform.NOT_ASSIGN);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取校验结果</span></span><br><span class="line">List&lt;BOResCommonPhoneNumBean&gt; = check.getSuccessList();<span class="comment">//校验成功的数据</span></span><br><span class="line">List&lt;Map&gt; errorInfo = check.getErrorList();<span class="comment">//校验失败的数据,errorInfo中包含了RES_NO(资源编号)和CHECK_INFO(校验失败的信息)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1、初始化实例方法：CheckResult-init"><a href="#1、初始化实例方法：CheckResult-init" class="headerlink" title="1、初始化实例方法：CheckResult.init()"></a>1、初始化实例方法：CheckResult.init()</h4><p>先看下核心的初始化方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 初始化CheckResult对象</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> source     待校验数据，程序包装的bo数组，须包含有入参resNoField的属性</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> existData  从数据库中查询得到的数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> resNoField 代表资源号码的属性名，如号码业务是"MSISDN"、sim卡业务是"ICCID"</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;K extends DataContainer&gt; <span class="function">CheckResult&lt;K&gt; <span class="title">init</span><span class="params">(K[] source, K[] existData, String resNoField)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>初始化方法有两个重载：需要<strong>存在性校验</strong>的，和不需要<strong>存在性校验</strong>的：</p>
+<ol>
+<li><p>存在性校验一般是前台用户<strong>手动输入数据提交</strong>或者<strong>文件提交</strong>的源数据，这种情况下提交的数据<strong>有可能在数据库中并不存在</strong>，所以要进行存在性校验。此时入参source是根据用户提交的数据由代码组装生成的。入参existData是将用户提交的数据为条件到数据库中查询所得的数据，这部分数据是必然存在的数据，而且集合大小肯定小于或等于source。为了节省代码，设计了一个入参为Dao类Class，自动通过Dao和source去查询存在数据的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 初始化CheckResult对象</span></span><br><span class="line"><span class="comment"> * 此方法会根据source和resNoField去数据库查询出完整bo列表</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> source     待校验数据，程序包装的bo数组，须包含有入参resNoField的属性</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> daoClass   待校验数据对应的daoClass</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> resNoField 代表资源号码的属性名，如号码业务是"MSISDN"、sim卡业务是"ICCID"</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;K extends DataContainer&gt; <span class="function">CheckResult&lt;K&gt; <span class="title">init</span><span class="params">(K[] source, Class&lt;? extends BaseDao&lt;K&gt;&gt; daoClass, String resNoField)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>上面的示例中的代码可以简写成：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// -原始代码：</span></span><br><span class="line"><span class="comment">// 到数据库中获取sourceNumbers中已存在的号码数据</span></span><br><span class="line">IResCommonPhoneNumDAO dao = ServiceUtil.get(IResCommonPhoneNumDAO.dao);</span><br><span class="line">BOResCommonPhoneNumBean[] existNumbers= dao.getByField(<span class="string">"MSISDN"</span>, numbers)</span><br><span class="line"><span class="comment">// 初始化CheckResult实例</span></span><br><span class="line">CheckResult&lt;BOResCommonPhoneNumBean&gt; check = CheckResult.init(sourceNumbers, existNumbers, <span class="string">"MSISDN"</span>);</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">// -------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// -简写后：</span></span><br><span class="line">CheckResult&lt;BOResCommonPhoneNumBean&gt; check = CheckResult.init(sourceNumbers, IResCommonPhoneNumDAO.class, "MSISDN");</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>还有另一种场景是数据由<strong>用户在页面上查询出来的数据然后勾选提交</strong>的，确保不可能有数据不存在的情况，就不需要进行存在性校验，针对这种场景的重载方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不需要source，只传existData</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;K extends DataContainer&gt; <span class="function">CheckResult&lt;K&gt; <span class="title">init</span><span class="params">(K[] existData, String resNoField)</span></span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="2、存在性校验：checkExist"><a href="#2、存在性校验：checkExist" class="headerlink" title="2、存在性校验：checkExist()"></a>2、存在性校验：checkExist()</h4><p>在CheckResult中用了两个成员变量分别保存source（源数据）和existData（数据库已存在数据），那么当校验数据是否存在时，只要把这两个数组”相减”就得到了不存在的数据了，每个校验方法都会把不通过的数据放到CheckResult类的成员属性errorList中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CheckResult check = CheckResult.init(numbers, <span class="string">"MSISDN"</span>, commonPhoneNumDAO, <span class="keyword">true</span>);</span><br><span class="line"><span class="comment">// 存在性校验</span></span><br><span class="line">check.checkExist(<span class="string">"该号码不存在！"</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、不存在校验：checkNotExist"><a href="#3、不存在校验：checkNotExist" class="headerlink" title="3、不存在校验：checkNotExist()"></a>3、不存在校验：checkNotExist()</h4><p>用于校验数据集合中的数据是否存在，若存在，则校验不通过</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CheckResult check = CheckResult.init(numbers, IResCommonPhoneNumDAO.class "MSISDN");</span><br><span class="line"><span class="comment">// 规则1：在号码通用表中必须不存在</span></span><br><span class="line">check.checkNotExist(<span class="string">"号码已存在！"</span>);</span><br><span class="line"><span class="comment">// 规则2：在一卡多号表中必须不存在</span></span><br><span class="line">check.checkNotExist(<span class="string">"号码已在一卡多号表中存在！"</span>, IRes1cmPhoneNumDAO<span class="class">.<span class="keyword">class</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>checkNotExist()</code>有两个重载方法，在规则1中方法只有一个入参，则校验在实例初始化时，numbers集合中不存在的数据；若像规则2中传入第二参数daoClass，则校验在传入class对应的表中不存在。</p>
+<h4 id="4、相等校验：checkEqual"><a href="#4、相等校验：checkEqual" class="headerlink" title="4、相等校验：checkEqual()"></a>4、相等校验：checkEqual()</h4><p>相等校验应该是业务校验中最常用的方式了</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 相等校验,校验数组中每个bean的属性"DN_PLATORM"是否等于常量ResComConst.NumPlatform.NOT_ASSIGN</span></span><br><span class="line">check.checkEqual(<span class="string">"该号码已经被下发！"</span>, <span class="string">"DN_PLATORM"</span>, ResComConst.NumPlatform.NOT_ASSIGN);</span><br></pre></td></tr></table></figure>
+
+<p>方法定义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 属性相等校验</span></span><br><span class="line"><span class="comment"> * 将属性值不等于equalValue的数据移动到errorList</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> errorInfo  属性不相等的错误提示语</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> checkField 校验字段</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> equalValue 比对的值，传多个的时候只要有一个相等就算校验通过</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CheckResult <span class="title">checkEqual</span><span class="params">(String errorInfo, String checkField, Object... equalValue)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>注意入参<code>equalValue</code>是可变参数，有时候想校验某个属性的值是多个中的一个，就可以在<code>equalValue</code>中传多个参数。</p>
+<p>相等比较还有更高阶的用法，像这个需求：</p>
+<blockquote>
+<p>号码生成的时候<strong>号码的前4位</strong>需要在号码运营商表的<strong>号码前缀</strong>中配置</p>
+</blockquote>
+<p>号码是8位的，要将提交的号码前4位取出来和号码运营商表的号码前缀做比较，如何实现呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取号码配置表的号码前缀集合</span></span><br><span class="line">String[] msisdnPrefix = numberOperatorDAO.getPrefixByOperationCode(operationCode);</span><br><span class="line"><span class="comment">//比较MSISDN的前4位是否包含在号码前缀集合中</span></span><br><span class="line">check.checkEqual(<span class="string">"号码前4位不在号码归属运营商配置表中！"</span>,<span class="string">"MSISDN"</span>, v -&gt; v.substring(<span class="number">0</span>, <span class="number">4</span>), <span class="keyword">null</span>, msisdnPrefix);</span><br></pre></td></tr></table></figure>
+
+<p>注意看<code>checkEqual()</code>的第3个参数，<code>v -&gt; v.substring(0, 4)</code>，用了一个lambda表达式，代表<strong>把待校验的每一个数据截取前4位再去进行比较</strong></p>
+<p>这个重载方法的定义如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 属性相等校验（可对校验的值做处理）</span></span><br><span class="line"><span class="comment"> * 将属性值不等于equalValue的数据移动到errorList</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> errorInfo  错误提示语</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> checkField 校验字段</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> f1         针对校验的值的处理函数，如只校验号码的前4位（v-&gt;v.substring(0,4)）</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> f2         针对对比的值的处理函数，如只需要比对值的前4位（v-&gt;v.substring(0,4)）</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> equalValue 比对的值，传多个的时候只要有一个相等就算校验通过</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CheckResult <span class="title">checkEqual</span><span class="params">(String errorInfo, String checkField, Function&lt;String, String&gt; f1, Function&lt;String, String&gt; f2, Object... equalValue)</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5、不相等校验：checkNotEqual"><a href="#5、不相等校验：checkNotEqual" class="headerlink" title="5、不相等校验：checkNotEqual()"></a>5、不相等校验：checkNotEqual()</h3><p>和相等校验的逻辑类似，这里就不赘述了。</p>
+<p><strong>方法定义：</strong></p>
+<ol>
+<li>一般情况</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 属性不相等校验</span></span><br><span class="line"><span class="comment"> * 将属性值等于notEqualValue的数据移动到errorList</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> errorInfo     属性相等的错误提示语</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> checkField    校验字段</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> notEqualValue 比对的值，传多个的时候全部不相等才算校验通过</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CheckResult <span class="title">checkNotEqual</span><span class="params">(String errorInfo, String checkField, Object... notEqualValue)</span></span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>高阶情况，对待校验数据或比对的值需要操作的时候</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> CheckResult <span class="title">checkNotEqual</span><span class="params">(String errorInfo, String checkField, Function&lt;String, String&gt; f1, Function&lt;String, String&gt; f2, Object[] notEqualValue)</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//校验：DN_PLATORM（当前平台）不能为未分配(1)</span></span><br><span class="line">check.checkNotEqual(<span class="string">"该号码未被下发"</span>, <span class="string">"DN_PLATORM"</span>, ResComConst.NumPlatform.NOT_ASSIGN);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//校验：MSISDN的前5位不能包含在blockPrefix中</span></span><br><span class="line">String[] blockPrefix = ServiceUtil.get(IResInterBlockDAO<span class="class">.<span class="keyword">class</span>).<span class="title">getAllBlockPrefix</span>()</span>;</span><br><span class="line">check.checkNotEqual(<span class="string">"香港内部保留号码，不允许下发"</span>, <span class="string">"MSISDN"</span>, v -&gt; v.substring(<span class="number">0</span>, <span class="number">5</span>), <span class="keyword">null</span>, blockPrefix);</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h5><p>com.asiainfo.res.core.atom.instance.base.model.CheckResult</p>
+<p>com.asiainfo.res.center.out.util.CsvUtil</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/easy-appframe/" rel="tag"><i class="fa fa-tag"></i> easy-appframe</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" rel="prev" title="如何快速搭建Hexo博客">
+      <i class="fa fa-chevron-left"></i> 如何快速搭建Hexo博客
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/01/%E4%BA%9A%E4%BF%A1/NAT%E5%86%85%E5%A4%96%E7%BD%91%E5%8F%8C%E8%BF%9E/" rel="next" title="亚信/NAT内外网双连">
+      亚信/NAT内外网双连 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基本数据校验"><span class="nav-text">一、基本数据校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、批量业务校验"><span class="nav-text">二、批量业务校验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主角登场—CheckResult"><span class="nav-text">主角登场—CheckResult</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、初始化实例方法：CheckResult-init"><span class="nav-text">1、初始化实例方法：CheckResult.init()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、存在性校验：checkExist"><span class="nav-text">2、存在性校验：checkExist()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、不存在校验：checkNotExist"><span class="nav-text">3、不存在校验：checkNotExist()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、相等校验：checkEqual"><span class="nav-text">4、相等校验：checkEqual()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、不相等校验：checkNotEqual"><span class="nav-text">5、不相等校验：checkNotEqual()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#源码："><span class="nav-text">源码：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Robot.L"
+      src="https://ooo.0o0.ooo/2016/11/30/583efcf224314.jpg">
+  <p class="site-author-name" itemprop="name">Robot.L</p>
+  <div class="site-description" itemprop="description">Hello world! :P</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Robot-L" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Robot-L" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:luo-zhan@qq.com" title="E-Mail → mailto:luo-zhan@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Robot.L</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout: 3000,
+        priority: true,
+        ignores: [uri => uri.includes('#'),uri => uri == 'https://robot-l.github.io/2019/12/18/%E4%BA%9A%E4%BF%A1/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/',]
+      });
+      });
+  </script>
+
+
+<script>
+NexT.utils.loadComments(() => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#comments',
+      verify: false,
+      notify: false,
+      appId: 'lyYHF1LhwH0DsHsISqAWfXws-gzGzoHsz',
+      appKey: 'UQzH8NnDurzsBeow1j94a5CL',
+      placeholder: "留个言吧~",
+      avatar: 'monsterid',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: true,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

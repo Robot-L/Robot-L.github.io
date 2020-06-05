@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/robot-logo-min.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/robot-logo-min.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/robot-logo-min.png">
+  <link rel="mask-icon" href="/images/robot-logo-min.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://robot-l.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: true,
+    pangu: false,
+    comments: {"style":"buttons","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="说来惭愧，16年我第一次使用Hexo搭建的github博客（就是眼前这个博客），写了第一篇博文【序】，say了一声hello world，就直接打入冷宫，3年过去还是那一篇博文…最近想把平时写的文章重新整理放到博客上，突然发现Hexo早就不会用了，赶紧重新找资料温习了一番，也趁此次机会记录一下搭建的全过程，或许能帮助需要的朋友。废话不多说，来看看如何建立一个功能强大，颜值还高的静态博客。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何快速搭建Hexo博客">
+<meta property="og:url" content="https://robot-l.github.io/2019/12/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="Mr R&#39;s Blog">
+<meta property="og:description" content="说来惭愧，16年我第一次使用Hexo搭建的github博客（就是眼前这个博客），写了第一篇博文【序】，say了一声hello world，就直接打入冷宫，3年过去还是那一篇博文…最近想把平时写的文章重新整理放到博客上，突然发现Hexo早就不会用了，赶紧重新找资料温习了一番，也趁此次机会记录一下搭建的全过程，或许能帮助需要的朋友。废话不多说，来看看如何建立一个功能强大，颜值还高的静态博客。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-06T17:10:40.000Z">
+<meta property="article:modified_time" content="2019-12-07T17:27:32.000Z">
+<meta property="article:author" content="Robot.L">
+<meta property="article:tag" content="博客">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robot-l.github.io/2019/12/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>如何快速搭建Hexo博客 | Mr R's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr R's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">热爱可抵岁月漫长</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">7</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/Robot-L" class="github-corner" title="点击进入我的GitHub" aria-label="点击进入我的GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://robot-l.github.io/2019/12/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://ooo.0o0.ooo/2016/11/30/583efcf224314.jpg">
+      <meta itemprop="name" content="Robot.L">
+      <meta itemprop="description" content="Hello world! :P">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr R's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何快速搭建Hexo博客
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-07 01:10:40" itemprop="dateCreated datePublished" datetime="2019-12-07T01:10:40+08:00">2019-12-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%83%A1%E6%90%9E%E7%9E%8E%E6%90%9E/" itemprop="url" rel="index">
+                    <span itemprop="name">胡搞瞎搞</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%83%A1%E6%90%9E%E7%9E%8E%E6%90%9E/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
+                    <span itemprop="name">博客</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" class="post-meta-item leancloud_visitors" data-flag-title="如何快速搭建Hexo博客" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/12/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>说来惭愧，16年我第一次使用Hexo搭建的github博客（就是眼前这个博客），写了第一篇博文【序】，say了一声hello world，就直接打入冷宫，3年过去还是那一篇博文…最近想把平时写的文章重新整理放到博客上，突然发现Hexo早就不会用了，赶紧重新找资料温习了一番，也趁此次机会记录一下搭建的全过程，或许能帮助需要的朋友。废话不多说，来看看如何建立一个功能强大，颜值还高的静态博客。 </p>
+<a id="more"></a>  
+
+<h1 id="搭建最简单的Hexo博客"><a href="#搭建最简单的Hexo博客" class="headerlink" title="搭建最简单的Hexo博客"></a>搭建最简单的Hexo博客</h1><h2 id="0-首先需要安装git和node-js，直接网上搜索下载安装包进行安装。"><a href="#0-首先需要安装git和node-js，直接网上搜索下载安装包进行安装。" class="headerlink" title="0.首先需要安装git和node.js，直接网上搜索下载安装包进行安装。"></a>0.首先需要安装<code>git</code>和<code>node.js</code>，直接网上搜索下载安装包进行安装。</h2><p>装完<code>node.js</code>就能使用<code>npm</code>命令（Node Package Manager）了，<code>npm</code>可以理解成一个前端的maven，用来管理js包，以后需要安装前端的东西都可以使用<code>npm</code>。</p>
+<h2 id="1-安装npm后，用npm命令安装hexo"><a href="#1-安装npm后，用npm命令安装hexo" class="headerlink" title="1.安装npm后，用npm命令安装hexo"></a>1.安装npm后，用npm命令安装hexo</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 注意命令中的美元符号$不要打，它只是个标识（不要问我为什么强调这个，[微笑脸]）</span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-cli -g</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-初始化博客项目"><a href="#2-初始化博客项目" class="headerlink" title="2.初始化博客项目"></a>2.初始化博客项目</h2><p>在你喜欢的地方新建一个目录（比如叫<code>blog</code>），作为博客的根目录，然后命令行进入到目录中执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 新建博客项目</span><br><span class="line">// 命令：$ hexo init [folder_name]</span><br><span class="line">// 如果没有指定folder_name ，Hexo 默认在命令行的当前目录（我们刚建立的是blog目录）生成项目文件</span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo init</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-部署博客项目"><a href="#3-部署博客项目" class="headerlink" title="3.部署博客项目"></a>3.部署博客项目</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 部署，会生成html等网页文件</span><br><span class="line">// 命令：$ hexo g[enerate]</span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo g</span></span><br></pre></td></tr></table></figure>
+<p>注：命令中带有中括号的表示可选，如果无特殊说明，省略即为简写形式，和写了的效果等价。</p>
+<h2 id="4-启动本地服务"><a href="#4-启动本地服务" class="headerlink" title="4.启动本地服务"></a>4.启动本地服务</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 启动服务，不指定端口默认4000</span><br><span class="line">// 命令： $ hexo s[erver] [-p[ort] 8080]</span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s</span></span><br></pre></td></tr></table></figure>
+<p>等待一会，访问<code>http://localhost:4000</code>就能看到刚生成的博客网站了，里面有一篇hello world的文章是hexo自己生成的。</p>
+<h2 id="5-写作"><a href="#5-写作" class="headerlink" title="5.写作"></a>5.写作</h2><p>文章目录在<code>source/_posts/</code>，已经有一个<code>hello-world.md</code>的范文，我们把自己的文章文件（必须是md文件）拷贝到这个目录下即可，建议在每篇文章的开头部分添加以下信息，指定标题和创建时间，hexo需要这些信息在页面上进行展示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: hello-world</span><br><span class="line">date: 2019-12-06 22:07:41</span><br><span class="line">---</span><br><span class="line">下面是你的博文，省略...</span><br></pre></td></tr></table></figure>
+<p>如果你很懒，不写这段头部信息也是可以，不过会默认title为文件名，文章创建时间为文件的生成时间。   </p>
+<p>最后刷新网页即可看到新添加的文章。</p>
+<h1 id="更换Next主题"><a href="#更换Next主题" class="headerlink" title="更换Next主题"></a>更换Next主题</h1><p>Hexo有各式各样的主题（<a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题全览</a>），Next就是其中一种，个人比较喜欢这种低调简洁的设计，安装十分简单，进入博客目录(目录中有个themes文件夹的就是)，执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure>
+<p>等待命令执行完之后，能看到目录<code>themes/next/</code>中多了很多文件<br>接着进行hexo主题配置更改，打开博客根目录（blog）中的<code>_config.yml</code>配置文件，找到其中的<code>theme</code>配置项，将其值改成<code>next</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+<p>改了配置文件需要重启服务生效</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//按 Ctrl+C 终止服务，然后重启服务：</span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Next主题中如何展示“分类”，“标签”"><a href="#Next主题中如何展示“分类”，“标签”" class="headerlink" title="Next主题中如何展示“分类”，“标签”"></a>Next主题中如何展示“分类”，“标签”</h1><p>刚新建的项目，还不支持这些页面，可以经过简单的配置实现这些功能。   </p>
+<ol>
+<li><p>先在<code>themes/next/_config.yml</code>配置文件中找到menu配置，将下面的about，tags，categories这三个配置前的注释符号<code>#</code>删掉，让首页能显示这几个栏目：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="attr">about:</span> <span class="string">/about/</span> <span class="string">||</span> <span class="string">user</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || heartbeat</span></span><br></pre></td></tr></table></figure></li>
+<li><p>新建相关页面</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 新建“标签”页面（tags），会在source目录下新建一个tags目录，并在其中生成一个index.md文件</span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo new page tags</span></span><br><span class="line">// 会提示如下信息，提示创建了新的目录和文件：</span><br><span class="line">INFO  Created: ~/blog/source/tags/index.md</span><br><span class="line"></span><br><span class="line">// 把另外两个也建好</span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo new page categories</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo new page about</span></span><br></pre></td></tr></table></figure></li>
+<li><p>编辑上一步新创建的三个<code>index.md</code>文件<br>先来编辑<code>source/tags/index.md</code>，打开文件可以看到内容只有title和date信息，我们在后面新增一行<code>type: &quot;tags&quot;</code>，表示这个文件是标签页面，如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2019-12-06 22:58:41</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>相应的，<code>source/categories/index.md</code>文件也进行修改，增加<code>type: &quot;categories&quot;</code>（分类页面）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2019-12-06 22:58:41</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>about文件不用增加type信息，直接在底下写一些自我介绍</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: about</span><br><span class="line">date: 2019-12-06 22:58:41</span><br><span class="line">---</span><br><span class="line">&gt; 本人沉迷搬砖，无法自拔，没空写自我介绍</span><br></pre></td></tr></table></figure>
+<p>刷新一下页面（热加载，不用重新发布或重启服务，给前端技术点赞👍），就可以看到首页的导航栏中已经有这几个导航按钮了，这时候点击进去只有内容还是空白的，因为博客文章中还没有标签或分类信息</p>
+</li>
+<li><p>最后，我们在任意文章中的头部信息里设置标签和分类信息（注意格式，标签可以设置多个，分类可以设置多级）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: hello-world</span><br><span class="line">date: 2019-12-06 22:07:41</span><br><span class="line">tags: </span><br><span class="line">- 标签1</span><br><span class="line">- 标签2</span><br><span class="line">categories: </span><br><span class="line">- 分类</span><br><span class="line">- 二级分类</span><br><span class="line">---</span><br><span class="line">下面是正文，省略...</span><br></pre></td></tr></table></figure>
+<p>配置好后再去刷新页面看看标签页面和分类页面的变化吧：）</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"><i class="fa fa-tag"></i> 博客</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/12/%E4%BA%9A%E4%BF%A1/BaseDao/" rel="prev" title="不用写Dao层的类——BaseDao">
+      <i class="fa fa-chevron-left"></i> 不用写Dao层的类——BaseDao
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/18/%E4%BA%9A%E4%BF%A1/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/" rel="next" title="如何优雅的进行批量业务校验">
+      如何优雅的进行批量业务校验 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#搭建最简单的Hexo博客"><span class="nav-text">搭建最简单的Hexo博客</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-首先需要安装git和node-js，直接网上搜索下载安装包进行安装。"><span class="nav-text">0.首先需要安装git和node.js，直接网上搜索下载安装包进行安装。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装npm后，用npm命令安装hexo"><span class="nav-text">1.安装npm后，用npm命令安装hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-初始化博客项目"><span class="nav-text">2.初始化博客项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-部署博客项目"><span class="nav-text">3.部署博客项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-启动本地服务"><span class="nav-text">4.启动本地服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-写作"><span class="nav-text">5.写作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更换Next主题"><span class="nav-text">更换Next主题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Next主题中如何展示“分类”，“标签”"><span class="nav-text">Next主题中如何展示“分类”，“标签”</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Robot.L"
+      src="https://ooo.0o0.ooo/2016/11/30/583efcf224314.jpg">
+  <p class="site-author-name" itemprop="name">Robot.L</p>
+  <div class="site-description" itemprop="description">Hello world! :P</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Robot-L" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Robot-L" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:luo-zhan@qq.com" title="E-Mail → mailto:luo-zhan@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Robot.L</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout: 3000,
+        priority: true,
+        ignores: [uri => uri.includes('#'),uri => uri == 'https://robot-l.github.io/2019/12/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2/',]
+      });
+      });
+  </script>
+
+
+<script>
+NexT.utils.loadComments(() => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#comments',
+      verify: false,
+      notify: false,
+      appId: 'lyYHF1LhwH0DsHsISqAWfXws-gzGzoHsz',
+      appKey: 'UQzH8NnDurzsBeow1j94a5CL',
+      placeholder: "留个言吧~",
+      avatar: 'monsterid',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: true,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

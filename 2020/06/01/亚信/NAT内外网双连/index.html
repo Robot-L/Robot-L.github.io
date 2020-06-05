@@ -49,12 +49,12 @@
   };
 </script>
 
-  <meta name="description" content="NAT内外网双连 环境 ：parallels desktop  + win7（需要软件可以找我）  内网网关：192.168.76.1  外网网关：192.168.0.1 1. MAC网络设置分别配置好外网、内网两个网络（左下角+可以增加配置），其中路由器就是网关地址，注意外网配置顺序在前（如果顺序错了，在下方的“设定服务顺序”可以更改）       至此Mac可以正常访问外网。 2. 虚拟机网络">
+  <meta name="description" content="NAT内外网双连 环境 ：parallels desktop  + win7（需要软件可以找我）  内网网关：192.168.76.1  外网网关：192.168.0.1 1. MAC网络设置分别配置好外网、内网两个网络（左下角+可以增加配置），其中路由器就是网关地址，注意外网配置顺序在前（如果顺序错了，在下方的“设定服务顺序”可以更改）       至此Mac可以正常访问外网。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="亚信&#x2F;NAT内外网双连">
+<meta property="og:title" content="Mac内外网双连&amp;端口转发">
 <meta property="og:url" content="https://robot-l.github.io/2020/06/01/%E4%BA%9A%E4%BF%A1/NAT%E5%86%85%E5%A4%96%E7%BD%91%E5%8F%8C%E8%BF%9E/index.html">
 <meta property="og:site_name" content="Mr R&#39;s Blog">
-<meta property="og:description" content="NAT内外网双连 环境 ：parallels desktop  + win7（需要软件可以找我）  内网网关：192.168.76.1  外网网关：192.168.0.1 1. MAC网络设置分别配置好外网、内网两个网络（左下角+可以增加配置），其中路由器就是网关地址，注意外网配置顺序在前（如果顺序错了，在下方的“设定服务顺序”可以更改）       至此Mac可以正常访问外网。 2. 虚拟机网络">
+<meta property="og:description" content="NAT内外网双连 环境 ：parallels desktop  + win7（需要软件可以找我）  内网网关：192.168.76.1  外网网关：192.168.0.1 1. MAC网络设置分别配置好外网、内网两个网络（左下角+可以增加配置），其中路由器就是网关地址，注意外网配置顺序在前（如果顺序错了，在下方的“设定服务顺序”可以更改）       至此Mac可以正常访问外网。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfah7fyiwbj30u00ufwu5.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfahpi7hgcj30vi0ks7kn.jpg">
@@ -63,7 +63,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfhaffhoukj30v30u0tfs.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfamsg6jltj30wc0u047p.jpg">
 <meta property="article:published_time" content="2020-06-01T03:09:55.659Z">
-<meta property="article:modified_time" content="2020-06-05T08:17:46.950Z">
+<meta property="article:modified_time" content="2020-06-05T13:37:56.019Z">
 <meta property="article:author" content="Robot.L">
 <meta property="article:tag" content="ROBOT block">
 <meta name="twitter:card" content="summary">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>亚信/NAT内外网双连 | Mr R's Blog</title>
+  <title>Mac内外网双连&端口转发 | Mr R's Blog</title>
   
 
 
@@ -167,7 +167,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">7</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">6</span></a>
 
   </li>
   </ul>
@@ -212,7 +212,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          亚信/NAT内外网双连
+          Mac内外网双连&端口转发
         </h1>
 
         <div class="post-meta">
@@ -224,9 +224,20 @@
 
               <time title="创建时间：2020-06-01 11:09:55" itemprop="dateCreated datePublished" datetime="2020-06-01T11:09:55+08:00">2020-06-01</time>
             </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%9A%E4%BF%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">亚信</span>
+                  </a>
+                </span>
+            </span>
 
           
-            <span id="/2020/06/01/%E4%BA%9A%E4%BF%A1/NAT%E5%86%85%E5%A4%96%E7%BD%91%E5%8F%8C%E8%BF%9E/" class="post-meta-item leancloud_visitors" data-flag-title="亚信/NAT内外网双连" title="阅读次数">
+            <span id="/2020/06/01/%E4%BA%9A%E4%BF%A1/NAT%E5%86%85%E5%A4%96%E7%BD%91%E5%8F%8C%E8%BF%9E/" class="post-meta-item leancloud_visitors" data-flag-title="Mac内外网双连&端口转发" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -271,6 +282,9 @@
 </li>
 </ul>
 <p><strong>至此Mac可以正常访问外网。</strong></p>
+<a id="more"></a>
+
+
 <h2 id="2-虚拟机网络设置"><a href="#2-虚拟机网络设置" class="headerlink" title="2. 虚拟机网络设置"></a>2. 虚拟机网络设置</h2><p>虚拟机右上角点击网络图标，改成<code>共享网络</code>（默认就是）</p>
 <img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfahpi7hgcj30vi0ks7kn.jpg" alt="image-20200530150459907" style="zoom: 50%;" />
 
@@ -349,10 +363,7 @@
     <a href="/2019/12/18/%E4%BA%9A%E4%BF%A1/%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/" rel="prev" title="如何优雅的进行批量业务校验">
       <i class="fa fa-chevron-left"></i> 如何优雅的进行批量业务校验
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/06/05/hello-world/" rel="next" title="Hello World">
-      Hello World <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -429,7 +440,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

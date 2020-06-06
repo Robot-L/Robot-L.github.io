@@ -59,13 +59,13 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfah7fyiwbj30u00ufwu5.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfahpi7hgcj30vi0ks7kn.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfakknqrt1j30pg0skdie.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfhfweke4zj30zc0l4ju7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfimup3eb4j31d00u0ahu.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfhaffhoukj30v30u0tfs.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfamsg6jltj30wc0u047p.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfilmtt2k2j30ko080tff.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfim4ehxq1j30nm0fuqd6.jpg">
 <meta property="article:published_time" content="2020-06-01T03:09:55.659Z">
-<meta property="article:modified_time" content="2020-06-06T07:47:14.920Z">
+<meta property="article:modified_time" content="2020-06-06T08:09:31.637Z">
 <meta property="article:author" content="Robot.L">
 <meta property="article:tag" content="ROBOT block">
 <meta name="twitter:card" content="summary">
@@ -305,16 +305,16 @@
 <ol>
 <li><p>懒癌版： </p>
 <p>使用端口映射工具PortMap，配置已经配好打包在压缩包中，下载后解压到虚拟机桌面运行即可：</p>
-<p><img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfhfweke4zj30zc0l4ju7.jpg" alt="2.jpg"></p>
+<p><img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfimup3eb4j31d00u0ahu.jpg" alt="image-20200606160816774"></p>
 </li>
 </ol>
-<p>   软件在群文件里（PortMap端口映射.rar）</p>
+<p>   软件在群文件里（PortMap端口映射.zip）</p>
 <ol start="2">
 <li><p>命令行版（注意如果使用方式1就不能再使用该方式）</p>
 <p>在虚拟机的cmd（需以管理员权限运行）中执行：</p>
 </li>
 </ol>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1070</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1070</span></span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1080</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1080</span></span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1521</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1521</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1070</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1070</span></span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1080</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1080</span></span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1521</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">115</span> connectport=<span class="number">1521</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -328,8 +328,8 @@
 
 
 <p><strong>验证：Mac用浏览器访问 <a href="http://127.0.0.1:1070" target="_blank" rel="noopener">http://127.0.0.1:1070</a> 可以打开阿波罗配置中心</strong></p>
-<h2 id="6-mac-ip映射"><a href="#6-mac-ip映射" class="headerlink" title="6. mac ip映射"></a>6. mac ip映射</h2><p>在终端中执行下列命令，将192.192.2.101, 192.192.2.102两个内网地址的请求转发到127.0.0.1中去：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">EXT_INTERFACE=`ifconfig | grep -B 6 <span class="string">'192.168.0.'</span> | grep <span class="string">'\d: '</span>| tail -n 1 |awk -F\: <span class="string">'&#123;print $1&#125;'</span>`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"rdr on lo0 inet proto tcp from any to &#123;192.192.2.101,192.192.2.102&#125;  -&gt; 127.0.0.1 </span></span><br><span class="line"><span class="string">pass out on <span class="variable">$&#123;EXT_INTERFACE&#125;</span> route-to lo0 inet proto tcp from any to 192.192.2.101"</span>| sudo pfctl -ef -</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"执行成功！外网网卡：<span class="variable">$EXT_INTERFACE</span>"</span></span><br></pre></td></tr></table></figure>
+<h2 id="6-mac-ip映射"><a href="#6-mac-ip映射" class="headerlink" title="6. mac ip映射"></a>6. mac ip映射</h2><p>在终端中执行下列命令，将 192.192.0.0/16 的请求转发到 127.0.0.1 中去：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">EXT_INTERFACE=`ifconfig | grep -B 6 <span class="string">'192.168.0.'</span> | grep <span class="string">'\d: '</span>| tail -n 1 |awk -F\: <span class="string">'&#123;print $1&#125;'</span>`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"rdr on lo0 inet proto tcp from any to 192.192.0.0/16  -&gt; 127.0.0.1 </span></span><br><span class="line"><span class="string">pass out on <span class="variable">$&#123;EXT_INTERFACE&#125;</span> route-to lo0 inet proto tcp from any to 192.192.0.0/16"</span>| sudo pfctl -ef -</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"执行成功！外网网卡：<span class="variable">$EXT_INTERFACE</span>"</span></span><br></pre></td></tr></table></figure>
 
 <p>如提示需要输入密码，输入Mac开机密码即可。</p>
 <h2 id="7-开始上网"><a href="#7-开始上网" class="headerlink" title="7. 开始上网"></a>7. 开始上网</h2><p>用Mac浏览器访问一下 <a href="192.192.2.101:1070">192.192.2.101:1070</a>（阿波罗配置中心），测试是否成功：）</p>

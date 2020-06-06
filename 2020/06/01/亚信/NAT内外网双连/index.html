@@ -63,8 +63,9 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfhaffhoukj30v30u0tfs.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfamsg6jltj30wc0u047p.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfilmtt2k2j30ko080tff.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfim4ehxq1j30nm0fuqd6.jpg">
 <meta property="article:published_time" content="2020-06-01T03:09:55.659Z">
-<meta property="article:modified_time" content="2020-06-06T07:27:51.031Z">
+<meta property="article:modified_time" content="2020-06-06T07:47:14.920Z">
 <meta property="article:author" content="Robot.L">
 <meta property="article:tag" content="ROBOT block">
 <meta name="twitter:card" content="summary">
@@ -298,8 +299,6 @@
 <h2 id="3-安装4A软件及设置环境"><a href="#3-安装4A软件及设置环境" class="headerlink" title="3. 安装4A软件及设置环境"></a>3. 安装4A软件及设置环境</h2><p>安装好4A后，插上key，登陆之前需要设置mac路由，此时虚拟机是通过mac联网，所以在Mac终端中需要配置4A的网关为内网网关：(可能提示需要输入Mac登陆密码，输入完后按回车即可)</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo route add -net 10.154.0.0 192.168.76.1</span><br></pre></td></tr></table></figure>
 
-
-
 <p><strong>然后在虚拟机4A中输入密码进行登陆，提示登陆成功。</strong></p>
 <p><strong>验证：虚拟机浏览器访问 <a href="http://192.192.2.101:1070" target="_blank" rel="noopener">http://192.192.2.101:1070</a> ，可以打开内网的阿波罗配置中心</strong></p>
 <h2 id="4-虚拟机IP映射"><a href="#4-虚拟机IP映射" class="headerlink" title="4. 虚拟机IP映射"></a>4. 虚拟机IP映射</h2><p>  有两种方式，<strong>只能选其中一种方式进行设置</strong>：</p>
@@ -344,7 +343,11 @@
 <li><p>登陆4A时提示未插入key，可以在虚拟机右上角usb选项中将4A key设备（带有TOKEN字样）勾选一下：</p>
 <p><img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfilmtt2k2j30ko080tff.jpg" alt="image-20200606152601886"></p>
 </li>
+<li><p>如果登陆4A时，提示网络通信故障，检查证书类型是否选择正确：</p>
+</li>
 </ul>
+<img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfim4ehxq1j30nm0fuqd6.jpg" alt="image-20200606154256784" style="zoom:80%;" />
+
 
     </div>
 

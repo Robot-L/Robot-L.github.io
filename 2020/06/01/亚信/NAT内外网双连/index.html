@@ -62,8 +62,9 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfhfweke4zj30zc0l4ju7.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfhaffhoukj30v30u0tfs.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfamsg6jltj30wc0u047p.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfilmtt2k2j30ko080tff.jpg">
 <meta property="article:published_time" content="2020-06-01T03:09:55.659Z">
-<meta property="article:modified_time" content="2020-06-06T03:59:04.185Z">
+<meta property="article:modified_time" content="2020-06-06T07:27:51.031Z">
 <meta property="article:author" content="Robot.L">
 <meta property="article:tag" content="ROBOT block">
 <meta name="twitter:card" content="summary">
@@ -314,7 +315,7 @@
 <p>在虚拟机的cmd（需以管理员权限运行）中执行：</p>
 </li>
 </ol>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1070</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1070</span></span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1080</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1080</span></span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1521</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1080</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1070</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1070</span></span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1080</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1080</span></span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span> listenport=<span class="number">1521</span> connectaddress=<span class="number">192</span>.<span class="number">192</span>.<span class="number">2</span>.<span class="number">101</span> connectport=<span class="number">1521</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -338,7 +339,11 @@
 <p>本文只配置了最常用的三个内网地址，后续如果遇到其他需要访问的内网端口，只需要在步骤4、5中新增相应的端口映射配置（如项目中csf请求需要访问资源服务，192.192.2.101:20201，在步骤4、5中新增20201端口的映射规则即可）</p>
 </blockquote>
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li>重启Mac后路由设置将清空，所以需要重新执行步骤3的路由设置（可以自行研究如何启动自动设置路由），如果发现4A不能登录了先检查是不是路由设置被清空</li>
+<li><p>重启Mac后路由设置将清空，所以需要重新执行步骤3的路由设置（可以自行研究如何启动自动设置路由），如果发现4A不能登录了先检查是不是路由设置被清空</p>
+</li>
+<li><p>登陆4A时提示未插入key，可以在虚拟机右上角usb选项中将4A key设备（带有TOKEN字样）勾选一下：</p>
+<p><img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfilmtt2k2j30ko080tff.jpg" alt="image-20200606152601886"></p>
+</li>
 </ul>
 
     </div>

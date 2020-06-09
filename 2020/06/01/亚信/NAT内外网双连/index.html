@@ -64,8 +64,9 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfamsg6jltj30wc0u047p.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfilmtt2k2j30ko080tff.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfim4ehxq1j30nm0fuqd6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflvx9wtdij310y0litgs.jpg">
 <meta property="article:published_time" content="2020-06-01T03:09:55.659Z">
-<meta property="article:modified_time" content="2020-06-06T08:09:31.637Z">
+<meta property="article:modified_time" content="2020-06-09T03:42:47.792Z">
 <meta property="article:author" content="Robot.L">
 <meta property="article:tag" content="ROBOT block">
 <meta name="twitter:card" content="summary">
@@ -338,7 +339,7 @@
 <p>本文只配置了最常用的三个内网地址，后续如果遇到其他需要访问的内网端口，只需要在步骤4、5中新增相应的端口映射配置（如项目中csf请求需要访问资源服务，192.192.2.101:20201，在步骤4、5中新增20201端口的映射规则即可）</p>
 </blockquote>
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li><p>重启Mac后路由设置将清空，所以需要重新执行步骤3的路由设置（可以自行研究如何启动自动设置路由），如果发现4A不能登录了先检查是不是路由设置被清空</p>
+<li><p>重启Mac后路由设置将清空，所以需要重新执行步骤3的路由设置（可以自行研究如何开机自动设置路由），如果发现虚拟机4A不能登录了先检查是不是路由设置被清空</p>
 </li>
 <li><p>登陆4A时提示未插入key，可以在虚拟机右上角usb选项中将4A key设备（带有TOKEN字样）勾选一下：</p>
 <p><img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfilmtt2k2j30ko080tff.jpg" alt="image-20200606152601886"></p>
@@ -348,6 +349,12 @@
 </ul>
 <img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfim4ehxq1j30nm0fuqd6.jpg" alt="image-20200606154256784" style="zoom:80%;" />
 
+<ul>
+<li><p>Mac用手机热点连接上网时，无法访问内网</p>
+<p>使用其他网络上网的同时不能访问内网，因为改变了默认路由，不再使用证券外网为默认网关，断开其他网络即可正常访问内网</p>
+<p><img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflvx9wtdij310y0litgs.jpg" alt="image-20200609113858695"></p>
+</li>
+</ul>
 
     </div>
 

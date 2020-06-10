@@ -49,24 +49,28 @@
   };
 </script>
 
-  <meta name="description" content="背景资源业务有很多txt文件上传的场景，txt中一般有多列数据，然后根据这些数据去操作数据库。举个栗子，号码状态修改页面，上传文件像这样： 12312345678;3;412345679;3;5...省略若干行  每行3个数据，用”;”分隔，分别代表”号码”，”原始状态”，”目标状态”，需求是将每行的号码由”原始状态”改为”目标状态”。 这种类似的需求，上传文件中每行的数据都有可能不同，有的一个数">
+  <meta name="description" content="背景框架组维护的项目非常多，整个项目分为10来个模块，每个模块又分为核心业务、湖南、青海三个版本，现在接到一个任务要把每个模块的gradle中的maven私服地址更新一下。 所有的工程地址如下，如果手动下载项目、更新文件、提交代码那想想就可怕。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TXT文件上传解析">
-<meta property="og:url" content="https://robot-l.github.io/2019/05/12/%E4%BA%9A%E4%BF%A1/TXT%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:title" content="用shell实现git批量下载、更新、提交项目">
+<meta property="og:url" content="https://robot-l.github.io/2020/06/09/%E4%BA%9A%E4%BF%A1/git%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="Mr R&#39;s Blog">
-<meta property="og:description" content="背景资源业务有很多txt文件上传的场景，txt中一般有多列数据，然后根据这些数据去操作数据库。举个栗子，号码状态修改页面，上传文件像这样： 12312345678;3;412345679;3;5...省略若干行  每行3个数据，用”;”分隔，分别代表”号码”，”原始状态”，”目标状态”，需求是将每行的号码由”原始状态”改为”目标状态”。 这种类似的需求，上传文件中每行的数据都有可能不同，有的一个数">
+<meta property="og:description" content="背景框架组维护的项目非常多，整个项目分为10来个模块，每个模块又分为核心业务、湖南、青海三个版本，现在接到一个任务要把每个模块的gradle中的maven私服地址更新一下。 所有的工程地址如下，如果手动下载项目、更新文件、提交代码那想想就可怕。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1g9oa2hzk6cj319w0cejtp.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1g9oa2hbczvj30zo07amz4.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1g9oa2gp4ldj313w0fk400.jpg">
-<meta property="article:published_time" content="2019-05-12T01:10:40.000Z">
-<meta property="article:modified_time" content="2019-12-19T12:53:31.000Z">
+<meta property="og:image" content="https://robot-l.github.io/Users/luozhan/Library/Application%20Support/typora-user-images/image-20200609212430723.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfmchav9yjj30ai05eaae.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfmctc0dyej30zo08en3s.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfmdssscckj30cy07caan.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfmdx357twj311q02k75u.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfmdysjgxrj311w02e40f.jpg">
+<meta property="article:published_time" content="2020-06-09T14:08:54.509Z">
+<meta property="article:modified_time" content="2020-06-10T01:14:20.124Z">
 <meta property="article:author" content="Robot.L">
-<meta property="article:tag" content="easy-appframe">
+<meta property="article:tag" content="shell">
+<meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1g9oa2hzk6cj319w0cejtp.jpg">
+<meta name="twitter:image" content="https://robot-l.github.io/Users/luozhan/Library/Application%20Support/typora-user-images/image-20200609212430723.png">
 
-<link rel="canonical" href="https://robot-l.github.io/2019/05/12/%E4%BA%9A%E4%BF%A1/TXT%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/">
+<link rel="canonical" href="https://robot-l.github.io/2020/06/09/%E4%BA%9A%E4%BF%A1/git%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C/">
 
 
 <script id="page-configurations">
@@ -78,7 +82,7 @@
   };
 </script>
 
-  <title>TXT文件上传解析 | Mr R's Blog</title>
+  <title>用shell实现git批量下载、更新、提交项目 | Mr R's Blog</title>
   
 
 
@@ -196,7 +200,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://robot-l.github.io/2019/05/12/%E4%BA%9A%E4%BF%A1/TXT%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://robot-l.github.io/2020/06/09/%E4%BA%9A%E4%BF%A1/git%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://ooo.0o0.ooo/2016/11/30/583efcf224314.jpg">
@@ -209,7 +213,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          TXT文件上传解析
+          用shell实现git批量下载、更新、提交项目
         </h1>
 
         <div class="post-meta">
@@ -219,7 +223,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-12 09:10:40" itemprop="dateCreated datePublished" datetime="2019-05-12T09:10:40+08:00">2019-05-12</time>
+              <time title="创建时间：2020-06-09 22:08:54" itemprop="dateCreated datePublished" datetime="2020-06-09T22:08:54+08:00">2020-06-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -234,7 +238,7 @@
             </span>
 
           
-            <span id="/2019/05/12/%E4%BA%9A%E4%BF%A1/TXT%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/" class="post-meta-item leancloud_visitors" data-flag-title="TXT文件上传解析" title="阅读次数">
+            <span id="/2020/06/09/%E4%BA%9A%E4%BF%A1/git%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C/" class="post-meta-item leancloud_visitors" data-flag-title="用shell实现git批量下载、更新、提交项目" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -249,8 +253,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/05/12/%E4%BA%9A%E4%BF%A1/TXT%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/05/12/%E4%BA%9A%E4%BF%A1/TXT%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/06/09/%E4%BA%9A%E4%BF%A1/git%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/09/%E4%BA%9A%E4%BF%A1/git%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -265,57 +269,51 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>资源业务有很多txt文件上传的场景，txt中一般有多列数据，然后根据这些数据去操作数据库。举个栗子，号码状态修改页面，上传文件像这样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">12345678</span>;<span class="number">3</span>;<span class="number">4</span></span><br><span class="line"><span class="number">12345679</span>;<span class="number">3</span>;<span class="number">5</span></span><br><span class="line">...省略若干行</span><br></pre></td></tr></table></figure>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>框架组维护的项目非常多，整个项目分为10来个模块，每个模块又分为核心业务、湖南、青海三个版本，现在接到一个任务要把每个模块的gradle中的maven私服地址更新一下。</p>
+<p>所有的工程地址如下，如果手动下载项目、更新文件、提交代码那想想就可怕。</p>
+<img data-src="/Users/luozhan/Library/Application Support/typora-user-images/image-20200609212430723.png" alt="image-20200609212430723" style="zoom:33%;" />
 
-<p>每行3个数据，用”;”分隔，分别代表”号码”，”原始状态”，”目标状态”，需求是将每行的号码由”原始状态”改为”目标状态”。</p>
-<p>这种类似的需求，上传文件中每行的数据都有可能不同，有的一个数据，有的三个数据，如何设计一套通用的解析方案来处理各种文件解析需求？</p>
 <a id="more"></a>
 
-<h2 id="1、上传文件解析模板"><a href="#1、上传文件解析模板" class="headerlink" title="1、上传文件解析模板"></a>1、上传文件解析模板</h2><p>想要对文件进行解析，那么必须要告诉程序一些格式规则，比如上个例子中每行3个数据，用”;”分隔，还要告诉每个数据代表什么意思，所以文件解析的功能必须有：</p>
-<ol>
-<li><strong>能获取关键数据，抛除没用的字符</strong></li>
-<li><strong>校验数据的格式是否合法</strong></li>
-<li><strong>获取数据后，要知道数据是什么含义</strong></li>
-</ol>
-<p>用程序来实现最合适的是正则表达式，可以正则表达式配置在文件里放到项目中，便于管理。</p>
-<p>来看下背景中描述的<strong>号码状态修改</strong>的文件解析模板：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 号码状态修改文件解析模板</span></span><br><span class="line"><span class="comment">// 格式：</span></span><br><span class="line">&#123;MSISDN(\d+)&#125;;&#123;STATUS_FROM(\d);&#123;STATUS_TO(\d)&#125;&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h2 id="批量git-clone"><a href="#批量git-clone" class="headerlink" title="批量git clone"></a>批量git clone</h2><p>先根据省份版本建立目录，其中framework目录是和省份版本无关的框架代码，另外3个是分别是核心业务、湖南版本、青海版本：</p>
+<p><img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfmchav9yjj30ai05eaae.jpg" alt="image-20200609211138633"></p>
+<p>在每个版本目录里写两个文件<code>batch_clone.sh</code>，<code>git_list.txt</code>，一个用来执行命令，另一个用来设置git列表：</p>
+<p>![image-20200609212011432](/Users/luozhan/Library/Application Support/typora-user-images/image-20200609212011432.png)</p>
+<p><code>batch_clone.sh</code>用于读取<code>git_list.tzt</code>并对url进行clone，文件内容如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进入脚本所在目录</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$( dirname "$&#123;BASH_SOURCE[0]&#125;" )</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> `cat git_list.txt`</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    git <span class="built_in">clone</span> <span class="variable">$url</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="built_in">clone</span> <span class="variable">$url</span> <span class="keyword">done</span>!</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
-<ol>
-<li><p>规则：<code>{属性名(正则)}</code>，每个要取的数据用”{}”括起来，包含属性名和正则表达式</p>
-</li>
-<li><p>省略号”…”代表循环前一行的表达式</p>
-</li>
-<li><p>如果解析的时候不需要校验数据格式可以省略正则表达式，简写成{属性名}</p>
-</li>
-</ol>
-<h2 id="2、使用说明"><a href="#2、使用说明" class="headerlink" title="2、使用说明"></a>2、使用说明</h2><ol>
-<li><p>将解析模板文件放在项目resource目录下合适的位置。</p>
-<p><img data-src="https://tva1.sinaimg.cn/large/006tNbRwgy1g9oa2hzk6cj319w0cejtp.jpg" alt=""></p>
-</li>
-<li><p>代码中使用<code>ResFileUtils.file2List(String fileId, String ftpPathCode, String templatePath)</code>将上传文件转换成List<Map></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果用户上传文件，则获取文件数据</span></span><br><span class="line"><span class="keyword">if</span> (fileId != <span class="keyword">null</span>) &#123;</span><br><span class="line">    String ftpPathCode = ResComConst.FtpPathCode.RES_NUM_CHANGE_STATE;</span><br><span class="line">    String templatePath = <span class="string">"import/res/num/numReserveRelease.txt"</span>;</span><br><span class="line">    List&lt;Map&lt;String, String&gt;&gt; list = ResFileUtils.file2List(fileId, ftpPathCode, templatePath);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>git_list.txt</code>文件配置该目录下需要clone的项目列表：</p>
+<p><img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfmctc0dyej30zo08en3s.jpg" alt="image-20200609212322476"></p>
+<p>接着开始执行命令，如果没有配置过git可以先执行如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name luozhan</span><br><span class="line">git config --global user.email luozhan@asiainfo.com</span><br><span class="line"><span class="comment"># 存储账号，否则每次clone都要输入账号密码</span></span><br><span class="line">git config --global credential.helper store</span><br></pre></td></tr></table></figure>
 
-<p>入参说明：</p>
-<ol>
-<li><strong>fileId</strong>：上传文件后框架返回的fileId</li>
-<li><strong>ftpPathCode</strong>：框架中文件上传ftp配置中的ftpPathCode，根据fileId和ftpPathCode用来获取到页面用户提交的文件</li>
-<li><strong>templatePath</strong>：解析模板的相对路径(相对于resource目录)</li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>解析结果list中的数据：</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;MSISDN:"12345678",STATUS_FROM:"3",STATUS_TO:"4"&#125;,</span><br><span class="line">  &#123;MSISDN:"12345679",STATUS_FROM:"3",STATUS_TO:"5"&#125;,</span><br><span class="line">  ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>然后打开终端，将sh文件拖动到终端窗口中执行：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Users/luozhan/work/hua-nan-zhong-xin/huanan/core/batch_clone.sh</span><br></pre></td></tr></table></figure>
 
-<p>如果上传文件中的数据不满足解析模板中的正则表达式，代码中会抛错提示用户第几行格式有误</p>
-<p><img data-src="https://tva1.sinaimg.cn/large/006tNbRwgy1g9oa2hbczvj30zo07amz4.jpg" alt=""></p>
-<p>上面的上传文件中第三行的”号码”因为不满足正则表达式<code>(\d+)</code>而抛错：</p>
-<p><img data-src="https://tva1.sinaimg.cn/large/006tNbRwgy1g9oa2gp4ldj313w0fk400.jpg" alt=""></p>
-<h5 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h5><p>com.ai.saas.crm.res.common.ResFileUtils.file2List()</p>
-<p>crm-web/web-res/src/main/resources/import/res/txt上传文件模板说明.txt </p>
+
+<p>如果提示无执行权限，给sh文件设置可执行权限：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 /Users/luozhan/work/hua-nan-zhong-xin/huanan/core/batch_clone.sh</span><br></pre></td></tr></table></figure>
+
+<p>然后可以看到git开始clone项目，如果提示需要用户名密码输入一次即可。</p>
+<h2 id="批量更新（pull）-amp-批量提交（push）"><a href="#批量更新（pull）-amp-批量提交（push）" class="headerlink" title="批量更新（pull）&amp;批量提交（push）"></a>批量更新（pull）&amp;批量提交（push）</h2><p>在根目录建立两个脚本<code>batch_pull.sh</code>和<code>batch_push.sh</code>：</p>
+<p><img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfmdssscckj30cy07caan.jpg" alt="image-20200609215718628"></p>
+<p><code>batch_pull.sh</code>内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'注意：请以sudo命令执行本脚本'</span></span><br><span class="line"><span class="built_in">read</span> -p  <span class="string">"请输入git项目上层目录全路径："</span> path</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$path</span></span><br><span class="line"><span class="comment"># 查找文件夹（grep过滤 -v反选，\.正则表达式包含符号.的）</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> `ls | grep -v <span class="string">'\.'</span>`</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">cd</span> <span class="variable">$line</span> &amp;&amp; git pull</span><br><span class="line">    <span class="built_in">cd</span> .. &amp;&amp; <span class="built_in">echo</span> <span class="variable">$line</span> pull <span class="keyword">done</span>!</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"all pull done, path: <span class="variable">$path</span>"</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>batch_push.sh</code>内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'注意：请以sudo命令执行本脚本'</span></span><br><span class="line"><span class="built_in">read</span> -p  <span class="string">"请输入git项目上层目录全路径："</span> path</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$path</span></span><br><span class="line"><span class="comment"># 查找文件夹（grep过滤 -v反选，\.正则表达式包含符号.的）</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> `ls | grep -v <span class="string">'\.'</span>`</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">cd</span> <span class="variable">$line</span> &amp;&amp; git add -A &amp;&amp; git commit -m <span class="string">"update IP"</span> &amp;&amp; git push</span><br><span class="line">    <span class="built_in">cd</span> .. &amp;&amp; <span class="built_in">echo</span> <span class="variable">$line</span> push成功!</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"all push done, path: <span class="variable">$path</span>"</span></span><br></pre></td></tr></table></figure>
+
+<p>执行的时候需要用sudo命令执行（提示需要密码输入机器的登陆密码即可）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /Users/luozhan/work/hua-nan-zhong-xin/huanan/batch_pull.sh</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfmdx357twj311q02k75u.jpg" alt="image-20200609220134821"></p>
+<p>将需要批量pull或push的git项目上层目录地址粘贴到输入板即可。</p>
+<p><img data-src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfmdysjgxrj311w02e40f.jpg" alt="image-20200609220313384"></p>
+<p>回车后开始执行。</p>
+<p>有时候遇到你提交的时候正好别人先提交了代码，但是和自己的文件没冲突，会弹出一个让你输入冲突信息的vim编辑器，直接输入<code>:wq!</code>退出就好了</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>本文没有提到批量修改文件的操作，因为每个项目要修改的文件并不相同，文件里的原始内容也不相同，用命令弄起来的时间成本可能比手动操作更高而且也不能给以后使用，所以权衡了一下还是手动修改吧。</p>
 
     </div>
 
@@ -326,7 +324,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/easy-appframe/" rel="tag"><i class="fa fa-tag"></i> easy-appframe</a>
+              <a href="/tags/shell/" rel="tag"><i class="fa fa-tag"></i> shell</a>
+              <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
           </div>
 
         
@@ -335,13 +334,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2011/10/02/%E9%9A%8F%E7%AC%94/%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90/" rel="prev" title="生日快乐">
-      <i class="fa fa-chevron-left"></i> 生日快乐
+    <a href="/2020/06/01/%E4%BA%9A%E4%BF%A1/NAT%E5%86%85%E5%A4%96%E7%BD%91%E5%8F%8C%E8%BF%9E/" rel="prev" title="Mac内外网双连&端口转发">
+      <i class="fa fa-chevron-left"></i> Mac内外网双连&端口转发
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/05/12/%E4%BA%9A%E4%BF%A1/BaseDao/" rel="next" title="不用写Dao层的类——BaseDao">
-      不用写Dao层的类——BaseDao <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -402,7 +398,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1、上传文件解析模板"><span class="nav-text">1、上传文件解析模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、使用说明"><span class="nav-text">2、使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#源码："><span class="nav-text">源码：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批量git-clone"><span class="nav-text">批量git clone</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批量更新（pull）-amp-批量提交（push）"><span class="nav-text">批量更新（pull）&amp;批量提交（push）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-text">最后</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -530,7 +526,7 @@
       quicklink({
         timeout: 3000,
         priority: true,
-        ignores: [uri => uri.includes('#'),uri => uri == 'https://robot-l.github.io/2019/05/12/%E4%BA%9A%E4%BF%A1/TXT%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/',]
+        ignores: [uri => uri.includes('#'),uri => uri == 'https://robot-l.github.io/2020/06/09/%E4%BA%9A%E4%BF%A1/git%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C/',]
       });
       });
   </script>
